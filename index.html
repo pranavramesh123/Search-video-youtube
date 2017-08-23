@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Search video youtube</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>#search_video {width: 900px;}</style>
+  </head>
+  <body>
+    <div class="container" id="search_video">
+      <div class="row">
+        <div class="col-xs-12">
+          <h1 class="text-center"><a href="/" target="_blank">Search Videos</a></h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title"><span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span> Search videos</h3>
+              </div>
+              <div class="panel-body">
+                <form action="#" method="POST" role="form" v-on:submit.prevent="onSubmit">
+                  <div class="form-group">
+                    <label for="keyword">Keyword</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="keyword" name="keyword" v-model="keyword" placeholder="keyword" autofocus required>
+                      <span class="input-group-btn">
+                        <button type="submit" class="btn btn-default" v-bind:class="{disabled: loading}"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> {{loading ? 'Loading...' : 'Scan'}}</button>
+                      </span>
+                    </div>
+                  </div>
+                </form>
+                <div class="alert alert-danger" v-if="error">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <strong>Error!</strong> {{ message_error }}
+                </div>
+              </div>
+              <table class="table table-bordered table-hover table-striped" v-if="items.length > 0">
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Thumbnail</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="item in items">
+                    <td><a v-bind:href="'https://www.youtube.com/watch?v=' + item.id.videoId" target="_blank">{{ item.snippet.title }}</a></td>
+                    <td>{{ item.snippet.description }}</td>
+                    <td><img v-bind:src="item.snippet.thumbnails.high.url" style="width: 100%" /></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="panel-footer text-center">
+               
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/vue-resource"></script>
+
+    <script src="main.js"></script>
+  </body>
+</html>
